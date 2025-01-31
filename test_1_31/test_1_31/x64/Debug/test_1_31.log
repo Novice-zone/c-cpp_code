@@ -1,3 +1,10 @@
 ﻿  test.c
-D:\github_cppcode\c-cpp_code\test_1_31\test_1_31\test.c(32,11): warning C4101: “s”: 未引用的局部变量
+D:\github_cppcode\c-cpp_code\test_1_31\test_1_31\test.c(79,9): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 1 拥有了类型“size_t”
+  D:\github_cppcode\c-cpp_code\test_1_31\test_1_31\test.c(79,9):
+  请考虑在格式字符串中使用“%zd”
+  
+D:\github_cppcode\c-cpp_code\test_1_31\test_1_31\test.c(80,9): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 1 拥有了类型“size_t”
+  D:\github_cppcode\c-cpp_code\test_1_31\test_1_31\test.c(80,9):
+  请考虑在格式字符串中使用“%zd”
+  
   test_1_31.vcxproj -> D:\github_cppcode\c-cpp_code\test_1_31\x64\Debug\test_1_31.exe
