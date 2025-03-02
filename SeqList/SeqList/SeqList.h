@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include<stdio.h>
 #include<stdlib.h>
-
+#include<assert.h>
 
 #define N 5 
 typedef int SLDataType;
@@ -30,12 +30,15 @@ void SLPrint(SL* ps);
 //删除
 void SLDestroy(SL* ps);
 
+//扩容
+void SLCheckCapacity(SL* ps);
+
 //尾插法
 void SLPushBack(SL* ps,SLDataType x);
 //尾删法
 void SLPopBack(SL* ps);
 
 //头插法
-void SLPushFront(SL* ps);
+void SLPushFront(SL* ps,SLDataType x);
 //头删法
 void SLPopFront(SL* ps);
