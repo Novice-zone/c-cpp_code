@@ -79,6 +79,23 @@ void TestSL3()
 	SLInsert(&s, 1, 200);
 	SLPrint(&s);
 
+	/*SLErase(&s, 1);
+	SLPrint(&s);
+	SLErase(&s, 1);
+	SLPrint(&s);
+	SLErase(&s, 1);
+	SLPrint(&s);
+	SLErase(&s, 1);
+	SLPrint(&s);
+	SLErase(&s, 1);
+	SLPrint(&s);*/
+	/*SLErase(&s, 1);
+	SLPrint(&s);*/
+	/*SLErase(&s, 1);
+	SLPrint(&s);*/
+	int a=SLFind(&s, 4);
+	printf("%d\n", a);//返回第一个符合条件元素的下标
+
 	SLDestroy(&s);
 }
 

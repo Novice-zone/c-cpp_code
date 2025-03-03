@@ -45,3 +45,9 @@ void SLPopFront(SL* ps);
 
 //插入数据
 void SLInsert(SL* ps, int pos, SLDataType x);
+
+//删除数据
+void SLErase(SL* ps, int pos);
+
+//查找
+int SLFind(SL* ps,SLDataType x);

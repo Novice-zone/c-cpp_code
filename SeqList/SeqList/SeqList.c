@@ -133,3 +133,29 @@ void SLInsert(SL* ps, int pos, SLDataType x)
 	ps->a[pos - 1] = x;
 	ps->size++;
 }
+
+void SLErase(SL* ps, int pos)
+{
+	assert(ps);
+	//pos为要删除位置的下标+1，方便传参（删除第pos个）
+	assert(pos > 0 && pos <= ps->size);
+
+	int begin = pos-1;// 要删除位置的下标
+	while (begin < ps->size -1)
+	{
+		ps->a[begin] = ps->a[begin+1];
+		begin++;
+	}
+	ps->size--;
+}
+
+int SLFind(SL* ps,SLDataType x)
+{
+	assert(ps);
+	for (int i = 0; i < ps->size; i++)
+	{
+		if (x == ps->a[i])
+			return i;
+	}
+	return -1;
+}
