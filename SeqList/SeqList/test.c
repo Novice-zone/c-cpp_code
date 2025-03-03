@@ -29,40 +29,61 @@ void TestSL1()
 
 void TestSL2()
 {
-	SL ps;
-	SLInit(&ps);
+	SL s;
+	SLInit(&s);
 
-	SLPushFront(&ps, 1);
-	SLPushFront(&ps, 2);
-	SLPushFront(&ps, 3);
-	SLPushFront(&ps, 4);
-	SLPrint(&ps);
+	SLPushFront(&s, 1);
+	SLPushFront(&s, 2);
+	SLPushFront(&s, 3);
+	SLPushFront(&s, 4);
+	SLPrint(&s);
 
-	SLPushFront(&ps, 5);
-	SLPrint(&ps);
+	SLPushFront(&s, 5);
+	SLPrint(&s);
 
-	SLPopFront(&ps);
-	SLPrint(&ps);
+	SLPopFront(&s);
+	SLPrint(&s);
 
-	SLPopFront(&ps);
-	SLPrint(&ps);
+	SLPopFront(&s);
+	SLPrint(&s);
 
-	SLPopFront(&ps);
-	SLPrint(&ps);
+	SLPopFront(&s);
+	SLPrint(&s);
 
-	SLPopFront(&ps);
-	SLPrint(&ps);
+	SLPopFront(&s);
+	SLPrint(&s);
 
-	SLPopFront(&ps);
-	SLPrint(&ps);
+	SLPopFront(&s);
+	SLPrint(&s);
 
-	SLPopFront(&ps);
-	SLPrint(&ps);
+	//SLPopFront(&s);
+	//SLPrint(&s);
 
+	SLDestroy(&s);
+}
+
+void TestSL3()
+{
+	SL s;
+	SLInit(&s);
+
+	SLPushBack(&s, 1);
+	SLPushBack(&s, 2);
+	SLPushBack(&s, 3);
+	SLPushBack(&s, 4);
+	SLPrint(&s);
+
+	SLInsert(&s, 2, 20);
+	SLPrint(&s);
+
+	SLInsert(&s, 1, 200);
+	SLPrint(&s);
+
+	SLDestroy(&s);
 }
 
 int main()
 {
-	TestSL2();
+	TestSL3();
 	return 0;
 }

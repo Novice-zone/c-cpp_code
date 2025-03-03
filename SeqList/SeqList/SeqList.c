@@ -83,7 +83,7 @@ void SLPushFront(SL* ps, SLDataType x)
 	SLCheckCapacity(ps);
 
 	int end = ps->size;
-	while (end >= 0)
+	while (end > 0)
 	{
 		ps->a[end] = ps->a[end - 1];
 		end--;
@@ -95,11 +95,41 @@ void SLPushFront(SL* ps, SLDataType x)
 void SLPopFront(SL* ps)
 {
 	assert(ps);
+	assert(ps->size > 0);
+
 	int begin = 0;
-	while (begin < ps->size)
+	while (begin < ps->size-1)//此处应该是size-1，否则有越界问题
 	{
 		ps->a[begin] = ps->a[begin + 1];
 		begin++;
 	}
+
+	/*for (int begin = 0; begin < ps->size - 1; begin++)
+	{
+		ps->a[begin] = ps->a[begin + 1];
+	}*/
+
+	//当size=1；不进入循环体直接size--，也满足删除的要求
+
 	ps->size--;
+}
+
+void SLInsert(SL* ps, int pos, SLDataType x)
+{
+	assert(ps);
+
+	//pos为要插入位置的下标+1，方便传参
+	assert(pos > 0 && pos <= ps->size);
+
+	SLCheckCapacity(ps);
+
+	int end = ps->size;//最后一个元素的下标+1
+	while (end >= pos)
+	{
+		ps->a[end] = ps->a[end-1];
+		end--;
+	}
+
+	ps->a[pos - 1] = x;
+	ps->size++;
 }
