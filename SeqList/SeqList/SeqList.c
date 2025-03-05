@@ -17,8 +17,8 @@ void SLInit(SL* ps)
 
 void SLPrint(SL* ps)
 {
-	assert(ps);
-	if (ps == 0) 
+	assert(ps);//是为了检查SL s是否初始化，若未初始化，&s就是一个空指针NULL
+	if (ps == 0) //ps==0表示SL s已经初始化，但无SLDataType类型的值，所以无法打印
 	{
 		return;
 	}
