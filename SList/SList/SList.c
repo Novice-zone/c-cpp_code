@@ -28,6 +28,7 @@ SLTNode* BuySLTNode(SLTDataType x)
 
 	return newnode;
 }
+
 void SLTPushBack(SLTNode** pphead, SLTDataType x)//二级指针可以修改实参,使用*pphead再修改数据即可
 {
 	SLTNode* newnode=BuySLTNode(x);
@@ -68,4 +69,82 @@ void SLTPushFront(SLTNode** pphead, SLTDataType x)
 	newnode->next = *pphead;
 	*pphead = newnode;
 
+}
+
+void SLTPopBack(SLTNode** pphead)
+{
+	//检查是否为空链表
+	assert(*pphead);
+	/*
+	if(*pphead==NULL)
+	{
+		return;
+	}
+	*/
+
+	//链表只有一个节点
+	if ((*pphead)->next == NULL)
+	{
+		free(*pphead);
+		*pphead = NULL;
+		return;
+	}
+
+	//链表有两个以上节点
+	//找尾
+	SLTNode* tail = *pphead;
+	while ((tail->next)->next != NULL)
+	{
+		tail = tail->next;
+	}
+	free(tail->next);
+	tail->next = NULL;
+}
+
+void SLTPopFront(SLTNode** pphead)
+{
+	assert(*pphead);
+
+	SLTNode* first = *pphead;
+	*pphead = (*pphead)->next;
+	free(first);
+	first = NULL;
+}
+
+SLTNode* SLTFind(SLTNode* phead, SLTDataType x)
+{
+	SLTNode* cur = phead;
+	while (cur)
+	{
+		if (cur->data == x)
+		{
+			return cur;//找到了返回当前地址
+		}
+
+		cur = cur->next;
+	}
+
+	//找不到返回NULL
+	return NULL;
+}
+
+//pos之前插入
+void SLTInsert(SLTNode** pphead, SLTNode* pos, SLTDataType x)
+{
+	assert(pos);
+	assert(pphead);
+	if (*pphead == NULL)
+	{
+		SLTPushBack(*pphead,x);
+	}
+	SLTNode* newnode = BuySLTNode(x);
+	
+	//插入位置cur
+	SLTNode* cur = *pphead;
+	while (cur->next != pos)
+	{
+		cur = cur->next;
+	}
+	cur->next = newnode;
+	newnode->next = pos;
 }
