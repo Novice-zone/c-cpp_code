@@ -94,10 +94,31 @@ void TEST6()
 	SLTNode* pos = SLTFind(plist, 2);
 	SLTInsert(&plist, pos, 20);
 	SLTPrint(plist);
+
+	SLTErase(&plist, pos);
+	SLTPrint(plist);
+}
+
+void TEST7()
+{
+	SLTNode* plist = NULL;
+	SLTPushBack(&plist, 1);
+	SLTPushBack(&plist, 2);
+	SLTPushBack(&plist, 3);
+	SLTPushBack(&plist, 4);
+	SLTPrint(plist);
+
+	SLTNode* pos = SLTFind(plist,2);
+	SLTInsertAfter(pos, 20);
+	SLTPrint(plist);
+
+	SLTEraseAfter(pos);
+	SLTPrint(plist);
+
 }
 
 int main()
 {
-	TEST6();
+	TEST7();
 	return 0;
 }

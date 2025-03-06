@@ -135,16 +135,58 @@ void SLTInsert(SLTNode** pphead, SLTNode* pos, SLTDataType x)
 	assert(pphead);
 	if (*pphead == NULL)
 	{
-		SLTPushBack(*pphead,x);
+		SLTPushBack(pphead,x);
 	}
 	SLTNode* newnode = BuySLTNode(x);
 	
 	//插入位置cur
-	SLTNode* cur = *pphead;
-	while (cur->next != pos)
+	SLTNode* prev = *pphead;
+	while (prev->next != pos)
 	{
-		cur = cur->next;
+		prev = prev->next;
 	}
-	cur->next = newnode;
+	prev->next = newnode;
 	newnode->next = pos;
+}
+
+void SLTErase(SLTNode** pphead, SLTNode* pos)
+{
+	assert(pphead);
+	assert(pos);
+	//assert(*pphead);
+
+	if (*pphead == pos)
+	{
+		SLTPopFront(pphead);
+		return;
+	}
+
+	SLTNode* prev = *pphead;
+	while (prev->next != pos)
+	{
+		prev = prev->next;
+		
+	}
+	prev->next = pos->next;
+	free(pos);
+}
+
+void SLTInsertAfter(SLTNode* pos, SLTDataType x)
+{
+	assert(pos);
+	SLTNode* newnode = BuySLTNode(x);
+	newnode->next = pos->next;
+	pos->next = newnode;
+}
+
+void SLTEraseAfter(SLTNode* pos)
+{
+	assert(pos);
+	assert(pos->next);
+
+	SLTNode* del = pos->next;
+	pos->next = del->next;
+
+	free(del);
+	del = NULL;
 }

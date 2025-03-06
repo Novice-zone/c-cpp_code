@@ -30,3 +30,13 @@ SLTNode* SLTFind(SLTNode* phead, SLTDataType x);
 
 //pos之前插入
 void SLTInsert(SLTNode** pphead, SLTNode* pos, SLTDataType x);
+
+//pos之前删除
+void SLTErase(SLTNode** phead, SLTNode* pos);
+
+//pos之后插入
+void SLTInsertAfter(SLTNode* pos,SLTDataType x);
+
+//pos之后删除
+void SLTEraseAfter(SLTNode* pos);
+
