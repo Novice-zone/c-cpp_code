@@ -4,6 +4,7 @@
 #include<assert.h>
 typedef int SLTDataType;
 
+//单链表:Single LisT Node
 typedef struct SLTNode
 {
 	SLTDataType data;
