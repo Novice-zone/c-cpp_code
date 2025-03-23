@@ -25,7 +25,21 @@ LTNode* LTInit()
 	return phead;
 }
 
-void LTDestroy();
+void LTDestroy(LTNode* phead)
+{
+	assert(phead);
+	LTNode* cur = phead->next;
+	while (cur != phead)
+	{
+		LTNode* next = cur->next;
+		free(cur);
+		cur = next;
+	}
+
+	//哨兵位未置空
+	free(phead);
+	//phead=NULL;
+}
 
 bool LTEmpty(LTNode* phead)
 {
@@ -87,7 +101,7 @@ void LTPopBack(LTNode* phead)
 
 	//free(tail);
 	//tail = NULL;
-	LTErase(phead);
+	LTErase(phead->prev);
 }
 
 void LTPushFront(LTNode* phead, LTDataType x)
@@ -125,7 +139,7 @@ void LTPopFront(LTNode* phead)
 	////phead->next = phead->next->next;
 	//phead->next = phead->next->next;
 	//phead->next->prev = phead;
-	LTErase(phead->next->next);
+	LTErase(phead->next);
 }
 
 LTNode* LTFind(LTNode* phead, LTDataType x)
@@ -158,10 +172,11 @@ void LTInsert(LTNode* pos, LTDataType x)
 void LTErase(LTNode* pos)
 {
 	assert(pos);
-	assert(!LTEmpty(pos));
-	LTNode* prev = pos->prev;
-	(pos->prev->prev)->next = pos;
-	pos->prev = pos->prev->prev;
-	free(prev);
-	prev = NULL;
+	LTNode* p = pos->prev;
+	LTNode* n = pos->next;
+	p->next = n;
+	n->prev = p;
+
+	free(pos);
+	pos = NULL;
 }

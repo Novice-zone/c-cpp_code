@@ -17,7 +17,7 @@ typedef struct ListNode
 
 LTNode* LTInit();
 
-void LTDestroy();
+void LTDestroy(LTNode* phead);
 
 void LTPrint(LTNode* phead);
 
@@ -37,5 +37,5 @@ LTNode* LTFind(LTNode* phead , LTDataType x);
 //在pos位置之前插入节点
 void LTInsert(LTNode* pos, LTDataType x);
 
-//删除pos之前的节点
+//删除pos位置的节点
 void LTErase(LTNode* pos);

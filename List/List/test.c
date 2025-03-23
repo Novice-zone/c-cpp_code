@@ -33,24 +33,25 @@ void TestList3()
 {
 	LTNode* plist = LTInit();
 	LTPushBack(plist, 1);
-	
-	LTNode* pos = LTFind(plist, 1);
-	LTInsert(pos, 5);
-	LTInsert(pos, 4);
-	LTInsert(pos, 3);
-	LTInsert(pos, 2);
+	LTPushBack(plist, 2);
+	LTPushBack(plist, 3);
+	LTPushBack(plist, 4);
+	LTPushBack(plist, 5);
 	LTPrint(plist);
 
-	LTErase(pos);
-	LTErase(pos);
-	LTErase(pos);
-	LTErase(pos);
-	LTErase(pos);
+	LTNode* pos = LTFind(plist,3);
+	if (pos != NULL)
+	{
+		LTErase(pos);
+	}
 	LTPrint(plist);
+
+	LTDestroy(plist);
+	plist = NULL;
 }
 
 int main()
 {
-	TestList2();
+	TestList3();
 	return 0;
 }
