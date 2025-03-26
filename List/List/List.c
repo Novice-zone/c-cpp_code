@@ -3,6 +3,8 @@
 LTNode* BuyListNode(LTDataType x)
 {
 	LTNode* newnode = (LTNode*)malloc(sizeof(LTNode));
+	//为什么给这个指针分配LTNode的空间而不是LTNode*（为什么给结构体指针分配结构体大小的空间）
+	//后续的 sizeof(LTNode) 大小的内存空间是被该结构体对象所占用的，其他程序或操作不能随意访问或修改这部分内存
 	if (newnode == NULL)
 	{
 		perror("malloc:");
