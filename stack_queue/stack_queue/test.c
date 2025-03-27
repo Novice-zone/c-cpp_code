@@ -22,19 +22,19 @@ void STTest()
 void QTest()
 {
 	Queue q;
-	QInit(&q);
+	QueueInit(&q);
 
-	QPush(&q, 1);
-	QPush(&q, 2);
-	QPush(&q, 3);
+	QueuePush(&q, 1);
+	QueuePush(&q, 2);
+	QueuePush(&q, 3);
 	//printf("%d\n", QSize(&q));
-	QPush(&q, 4);
-	QPush(&q, 5);
+	QueuePush(&q, 4);
+	QueuePush(&q, 5);
 
-	while (!QEmpty(&q))
+	while (!QueueEmpty(&q))
 	{
-		printf("%d ", QFront(&q));
-		QPop(&q);
+		printf("%d ", QueueFront(&q));
+		QueuePop(&q);
 	}
 	printf("\n");
 

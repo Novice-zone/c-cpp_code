@@ -1,28 +1,30 @@
 ﻿#define _CRT_SECURE_NO_WARNINGS 1
 #include "queue.h"
 
-void QInit(Queue* pq)
+void QueueInit(Queue* pq)
 {
-	assert(pq);
+	assert(pq);//确保传入的队列不为空
 
 	pq->head = pq->tail = NULL;
 	pq->size = 0;
 }
-void QDestroy(Queue* pq)
+void QueueDestroy(Queue* pq)
 {
 	assert(pq);
+	//释放每个节点，以达到释放整个队列的空间
 	while (pq->head)
 	{
-		Queue* next = pq->head->next;
+		QNode* next = pq->head->next;
 		free(pq->head);
 		pq->head = next;
 	}
 
+	//把指针置空防止非法访问
 	pq->head = pq->tail = NULL;
 	pq->size = 0;
 }
 
-void QPush(Queue* pq, QDataType x)
+void QueuePush(Queue* pq, QDataType x)
 {
 	assert(pq);
 	//尾插新节点
@@ -34,7 +36,8 @@ void QPush(Queue* pq, QDataType x)
 	}
 	newcode->data = x;
 	newcode->next = NULL;
-	if (pq->head == NULL)
+
+	if (pq->head == NULL)//当队列为空
 	{
 		assert(pq->tail == NULL);
 		pq->head = pq->tail = newcode;
@@ -47,11 +50,15 @@ void QPush(Queue* pq, QDataType x)
 
 	pq->size++;
 }
-void QPop(Queue* pq)
+void QueuePop(Queue* pq)
 {
+	//断言其实就是看是否存在为空的可能性，不可能则需要断言，以便出错时查找
 	assert(pq);
 	assert(pq->head!=NULL);
+
 	//最后一个节点要把head和tail都置空
+	//head  ->NULL
+	//tail  ->NULL
 	if (pq->head->next==NULL)
 	{
 		free(pq->head);
@@ -59,31 +66,34 @@ void QPop(Queue* pq)
 	}
 	else
 	{
+		//头删
 		QNode* next = pq->head->next;
 		free(pq->head);
 		pq->head = next;
 	}
 	pq->size--;
 }
-int QSize(Queue* pq)
+int QueueSize(Queue* pq)
 {
 	assert(pq);
 	return pq->size;
 }
-bool QEmpty(Queue* pq)
+bool QueueEmpty(Queue* pq)
 {
 	assert(pq);
 
-	return pq->head == pq->tail&&pq->head == NULL;
+	//return pq->head == pq->tail&&pq->head == NULL;
+	return pq->size == 0;
 }
-QDataType QFront(Queue* pq)
+QDataType QueueFront(Queue* pq)
 {
 	assert(pq);
-	assert(!QEmpty(pq));
+	assert(!QueueEmpty(pq));
 	return pq->head->data;
 }
-QDataType QBack(Queue* pq)
+QDataType QueueBack(Queue* pq)
 {
 	assert(pq);
+	assert(!QueueEmpty(pq));
 	return pq->tail->data;
 }
