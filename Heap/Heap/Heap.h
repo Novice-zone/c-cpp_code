@@ -20,3 +20,6 @@ void HeapPush(HP* php,HPDataType x);
 void HeapPop(HP* php);
 HPDataType HeapTop(HP* php);
 int HeapSize(HP* php);
+
+void AdjustUp(HPDataType* a, int child);
+void AdjustDown(HPDataType* a, int n, int parent);
