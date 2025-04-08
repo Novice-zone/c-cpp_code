@@ -27,6 +27,7 @@ void my_swap(HPDataType* p1, HPDataType* p2) {
 	*p2 = temp;
 }
 
+//要求左右子树都是大堆/小堆
 //向上迭代，物理上是对数组进行操作，因此传参必须要有数组。要通过child确定插入元素的下标和父节点的下标，因此要传入child (size-1)
 void AdjustUp(HPDataType* a, int child) {
 	int parent = (child - 1) / 2;
@@ -63,6 +64,8 @@ void HeapPush(HP* php, HPDataType x) {
 	AdjustUp(php->a, php->size - 1);//迭代函数一次性迭代完
 }
 
+//要求左右子树都是大堆/小堆
+//传入数组，数组大小，迭代位置parent
 void AdjustDown(HPDataType* a, int n,int parent) {
 	//同样的。对数组进行操作，传入数组。要得到数组大小来判断循环是否终止，传入数组大小n。
 	//要从parent位置开始迭代，传入parent

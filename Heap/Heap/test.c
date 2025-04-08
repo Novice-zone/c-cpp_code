@@ -1,13 +1,18 @@
 ﻿#define _CRT_SECURE_NO_WARNINGS 1
 #include"Heap.h"
 
+
 //排升序，建大堆
 void HeapSort(int* a, int n) {
-	//建堆，向上调整建堆
+	/*//建堆，向上调整建堆
 	for (int i = 1; i < n; i++) {
 		AdjustUp(a, i);
-	}
+	}*/
 
+	//建堆，向下调整建堆
+	for (int i = (n - 1 - 1) / 2; i >= 0; i--) {
+		AdjustDown(a, n, i);
+	}
 	//排序，向下调整排序
 	int end = n - 1;
 	while (end > 0) {
@@ -43,12 +48,10 @@ int main()
 	printf("\n");*/
 	
 	//堆排序
-	int a[10] = { 18,17,19,60,40,27,2,53,29 };
+	int a[10] = { 2,1,5,7,6,8,0,9,4,3 };
 	HeapSort(a, 10);
 
-	for (int i = 0; i < 10; i++) {
-		printf("%d ", a[i]);
-	}
+	
 
 	return 0;
 }
