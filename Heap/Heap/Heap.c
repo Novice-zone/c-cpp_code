@@ -14,6 +14,23 @@ void HeapInit(HP* php) {
 	php->capacity = 4;
 }
 
+void HeapInitArray(HP* php, int* a, int n) {
+	assert(php);
+
+	php->a = (HPDataType*)malloc(sizeof(HPDataType) * n);
+	if (php->a == NULL) {
+		perror("malloc:php->a");
+		return;
+	}
+	php->size = n;
+	php->capacity = n;
+
+	//建堆，向下调整建堆 --O（N）
+	for (int i = (n - 2) / 2; i >= 0; i--) {
+		AdjustDown(php->a,php->size,i);
+	}
+}
+
 void HeapDestroy(HP* php) {
 	assert(php);
 	free(php->a);
@@ -66,19 +83,44 @@ void HeapPush(HP* php, HPDataType x) {
 
 //要求左右子树都是大堆/小堆
 //传入数组，数组大小，迭代位置parent
-void AdjustDown(HPDataType* a, int n,int parent) {
+//void AdjustDown(HPDataType* a, int n,int parent) {
+//	//同样的。对数组进行操作，传入数组。要得到数组大小来判断循环是否终止，传入数组大小n。
+//	//要从parent位置开始迭代，传入parent
+//	int child = (parent * 2) + 1;
+//	
+//	while (child < n) {
+//		//保证child是大孩子,放入循环体保证每次都能更新child
+//		//if (a[child] < a[child + 1]) 
+//		if (child + 1 < n && a[child + 1] > a[child]) {
+//			child++;
+//		}
+//		
+//		if (a[parent] < a[child]) {
+//			//交换元素
+//			my_swap(&a[parent], &a[child]);
+//			//迭代变量
+//			parent = child;
+//			child = parent * 2 + 1;
+//		}
+//		else {//parent>child就退出循环
+//			break;
+//		}
+//	}
+//}
+//TopK问题需要建小堆
+void AdjustDown(HPDataType* a, int n, int parent) {
 	//同样的。对数组进行操作，传入数组。要得到数组大小来判断循环是否终止，传入数组大小n。
 	//要从parent位置开始迭代，传入parent
 	int child = (parent * 2) + 1;
-	
+
 	while (child < n) {
 		//保证child是大孩子,放入循环体保证每次都能更新child
 		//if (a[child] < a[child + 1]) 
-		if (child + 1 < n && a[child + 1] > a[child]) {
+		if (child + 1 < n && a[child + 1] < a[child]) {
 			child++;
 		}
-		
-		if (a[parent] < a[child]) {
+
+		if (a[parent] > a[child]) {
 			//交换元素
 			my_swap(&a[parent], &a[child]);
 			//迭代变量
