@@ -151,6 +151,27 @@ int TreeKLevel(BTNode* root, int k) {
 		+ TreeKLevel(root->right,k-1);
 }
 
+//二叉树查找值为x的结点，找到了就返回这个节点，有多个只返回第一个
+BTNode* BinaryTreeFind(BTNode* root, BTDataType x) {
+	if (root == NULL) {
+		return NULL;
+	}
+	if (root->data == x) {
+		return root;
+	}
+
+	BTNode* lret = BinaryTreeFind(root->left, x);
+	if (lret != NULL && lret->data == x) {
+		return lret;
+	}
+	
+	BTNode* rret = BinaryTreeFind(root->right, x);
+	if (rret != NULL && rret->data == x) {
+		return rret;
+	}
+
+	return NULL;
+}
 int main() {
 	BTNode* root=CreatTree();
 	PreOrder(root);
@@ -196,3 +217,28 @@ int main() {
 
 	printf("TreeKLevel:%d\n", TreeKLevel(root, 4));
 }
+
+
+///**
+// * Definition for a binary tree node.
+// * struct TreeNode {
+// *     int val;
+// *     struct TreeNode *left;
+// *     struct TreeNode *right;
+// * };
+// */
+//bool isUnivalTree(struct TreeNode* root) {
+//	if (root == NULL) {
+//		return true;
+//	}
+//
+//	if (root->left != NULL && root->val != root->left->val) {
+//		return false;
+//	}
+//
+//	if (root->right != NULL && root->val != root->right->val) {
+//		return false;
+//	}
+//
+//	return isUnivalTree(root->left) && isUnivalTree(root->right);
+//}
