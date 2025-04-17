@@ -2,6 +2,7 @@
 #include<stdio.h>
 #include<assert.h>
 #include<stdlib.h>
+#include "queue.h"
 
 typedef int BTDataType;
 typedef struct BinaryTreeNode {
@@ -172,6 +173,35 @@ BTNode* BinaryTreeFind(BTNode* root, BTDataType x) {
 
 	return NULL;
 }
+
+//层序遍历二叉树--队列实现
+//根节点进--根节点出，孩子进--孩子出，孩子的孩子进...
+void LevelOrder(BTNode* root) {
+	Queue q;
+	QueueInit(&q);
+	if (root) {
+		//二叉树节点不为NULL，入队
+		QueuePush(&q, root);
+	}
+
+	//出队
+	while (!QueueEmpty(&q)) {
+		BTNode* front = QueueFront(&q);
+		printf("%d ", front->data);
+		QueuePop(&q);
+
+		if (front->left) {
+			QueuePush(&q, front->left);
+		}
+		
+		if (front->right) {
+			QueuePush(&q, front->right);
+		}
+	}
+
+	QueueDestroy(&q);
+}
+
 int main() {
 	BTNode* root=CreatTree();
 	PreOrder(root);
@@ -216,6 +246,8 @@ int main() {
 	printf("TreeKLevel:%d\n", TreeKLevel(root, 3));
 
 	printf("TreeKLevel:%d\n", TreeKLevel(root, 4));
+
+	LevelOrder(root);
 }
 
 
