@@ -201,7 +201,58 @@ void LevelOrder(BTNode* root) {
 
 	QueueDestroy(&q);
 }
+// 判断二叉树是否是完全二叉树
+bool TreeComplete(BTNode* root)
+{
+	Queue q;
+	QueueInit(&q);
+	if (root)
+		QueuePush(&q, root);
 
+	while (!QueueEmpty(&q))
+	{
+		BTNode* front = QueueFront(&q);
+		QueuePop(&q);
+
+		if (front == NULL)
+		{
+			break;
+		}
+		else
+		{
+			QueuePush(&q, front->left);
+			QueuePush(&q, front->right);
+		}
+	}
+
+	// 判断是不是完全二叉树
+	while (!QueueEmpty(&q))
+	{
+		BTNode* front = QueueFront(&q);
+		QueuePop(&q);
+
+		// 后面有非空，说明非空节点不是完全连续
+		if (front)
+		{
+			QueueDestroy(&q);
+			return false;
+		}
+	}
+
+	QueueDestroy(&q);
+	return true;
+}
+
+// 二叉树销毁
+void TreeDestory(BTNode* root)
+{
+	if (root == NULL)
+		return;
+
+	TreeDestory(root->left);
+	TreeDestory(root->right);
+	free(root);
+}
 int main() {
 	BTNode* root=CreatTree();
 	PreOrder(root);
