@@ -202,43 +202,100 @@ void LevelOrder(BTNode* root) {
 	QueueDestroy(&q);
 }
 // 判断二叉树是否是完全二叉树
-bool TreeComplete(BTNode* root)
-{
+//bool TreeComplete(BTNode* root)
+//{
+//	Queue q;
+//	QueueInit(&q);
+//	if (root)
+//		QueuePush(&q, root);
+//
+//	while (!QueueEmpty(&q))
+//	{
+//		BTNode* front = QueueFront(&q);
+//		QueuePop(&q);
+//
+//		if (front == NULL)
+//		{
+//			break;
+//		}
+//		else
+//		{
+//			QueuePush(&q, front->left);
+//			QueuePush(&q, front->right);
+//		}
+//	}
+//
+//	// 判断是不是完全二叉树
+//	while (!QueueEmpty(&q))
+//	{
+//		BTNode* front = QueueFront(&q);
+//		QueuePop(&q);
+//
+//		// 后面有非空，说明非空节点不是完全连续
+//		if (front)
+//		{
+//			QueueDestroy(&q);
+//			return false;
+//		}
+//	}
+//
+//	QueueDestroy(&q);
+//	return true;
+//}
+//错误写法
+//bool isCompleteTree(BTNode* root) {
+//	//创建队列实现层序遍历
+//	Queue q;
+//	QueueInit(&q);
+//	if (root != NULL) {
+//		QueuePush(&q, root);
+//	}
+//	while (!QueueEmpty(&q)) {
+//		BTNode* front = QueueFront(&q);
+//		QueuePop(&q);
+//		if (front != NULL) {
+//			QueuePush(&q,front->left);
+//			QueuePush(&q,front->right);
+//		}
+//		else {
+//			break;
+//		}
+//	}
+//
+//	if (!QueueEmpty(&q)) {
+//		return false;
+//	}
+//	return true;
+//}
+bool isCompleteTree(BTNode* root) {
+	//创建队列实现层序遍历
 	Queue q;
 	QueueInit(&q);
-	if (root)
+	if (root != NULL) {
 		QueuePush(&q, root);
-
-	while (!QueueEmpty(&q))
-	{
+	}
+	while (!QueueEmpty(&q)) {
 		BTNode* front = QueueFront(&q);
 		QueuePop(&q);
-
-		if (front == NULL)
-		{
-			break;
-		}
-		else
-		{
+		if (front != NULL) {
 			QueuePush(&q, front->left);
 			QueuePush(&q, front->right);
 		}
+		else {
+			break;
+		}
 	}
-
-	// 判断是不是完全二叉树
-	while (!QueueEmpty(&q))
-	{
+	//遇到队列中第一个NULL跳出循环，判断剩余节点是否全为NULL
+	while (!QueueEmpty(&q)) {
 		BTNode* front = QueueFront(&q);
 		QueuePop(&q);
-
-		// 后面有非空，说明非空节点不是完全连续
-		if (front)
-		{
+		//第一个NULL后面有非空，说明不是完全二叉树
+		if (front != NULL) {
 			QueueDestroy(&q);
 			return false;
 		}
 	}
-
+	//后面全为NULL，真
 	QueueDestroy(&q);
 	return true;
 }
@@ -299,6 +356,8 @@ int main() {
 	printf("TreeKLevel:%d\n", TreeKLevel(root, 4));
 
 	LevelOrder(root);
+	printf("\n");
+	printf("%d",isCompleteTree(root));
 }
 
 
