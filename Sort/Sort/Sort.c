@@ -105,7 +105,7 @@ void SelectSort(int* a, int n) {
 		}
 		//最小/最大数放在最前面和最后面
 		Swap(&a[left], &a[mini]);
-		
+
 		//最大值maxi在最左边，而左边和mini交换位置，需要更新maxi的值
 		if (left == maxi) {
 			maxi = mini;
