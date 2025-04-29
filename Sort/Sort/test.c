@@ -13,11 +13,21 @@ void TestInsertSort()
 
 void TestShellSort()
 {
-	int a[] = { 9,8,7,6,5,4,3,2,1,0,-1,-2,-3,-3,-4,-5,-5,-6,-7,-8,-9 };
-	//int a[] = { 5,9,4,3,8,1,2,7,0,6 };
+	//int a[] = { 9,8,7,6,5,4,3,2,1,0,-1,-2,-3,-3,-4,-5,-5,-6,-7,-8,-9 };
+	int a[] = { 5,9,4,3,8,1,2,7,0,6 };
 	PrintArray(a, sizeof(a) / sizeof(int));
 
 	ShellSort(a, sizeof(a) / sizeof(int));
+
+	PrintArray(a, sizeof(a) / sizeof(int));
+}
+
+void TestSelectSort()
+{
+	int a[] = { 3,5,1,6,2,3,7,9,0,8 };
+	PrintArray(a, sizeof(a) / sizeof(int));
+
+	SelectSort(a, sizeof(a) / sizeof(int));
 
 	//PrintArray(a, sizeof(a) / sizeof(int));
 }
@@ -84,6 +94,7 @@ void TestOP()//这是白嫖来的测试排序性能的函数，单位是毫秒
 
 int main() {
 	//TestInsertSort();
-	TestShellSort();
+	//TestShellSort();
 	//TestOP();
+	TestSelectSort();
 }
